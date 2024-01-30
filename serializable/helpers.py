@@ -14,11 +14,9 @@
 Helper functions for deconstructing classes, functions, and user-defined
 objects into serializable types.
 """
-from __future__ import print_function, division, absolute_import
 from types import FunctionType, BuiltinFunctionType
 
 import simplejson as json
-from six import string_types, PY2, PY3
 
 from .primitive_types import return_primitive
 
@@ -56,12 +54,6 @@ def _lookup_value(module_string, name, _cache={}):
         value = _cache[key]
     else:
         module_parts = module_string.split(".")
-        # assuming that only JSON serialization from old Python2 runs
-        # of serialization would generate __builtin__ as a module
-        # name
-
-        if PY3 and module_parts[0] == "__builtin__":
-            module_parts = ["six", "moves", "builtins"] + module_parts[1:]
         value = None
         for i in range(1, len(module_parts) + 1):
             try:
@@ -94,10 +86,7 @@ def class_from_serializable_representation(class_repr):
 
 def get_module_name(obj):
     module_name = obj.__module__
-    if PY2 and module_name == "__builtin__":
-        return "six.moves.builtins"
-    else:
-        return module_name
+    return module_name
 
 def class_to_serializable_representation(cls):
     """
@@ -165,7 +154,7 @@ def dict_to_serializable_repr(x):
     # derived classes such as OrderedDict
     result = type(x)()
     for (k, v) in x.items():
-        if not isinstance(k, string_types):
+        if not isinstance(k, str):
             # JSON does not support using complex types such as tuples
             # or user-defined objects with implementations of __hash__ as
             # keys in a dictionary so we must keep the serialized

@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import print_function
 import os
 import re
 
@@ -57,7 +56,6 @@ if __name__ == '__main__':
         ],
         install_requires=[
             "typechecks>=0.0.2",
-            "six>=1.9.0",
             "simplejson",
         ],
         long_description=readme,
