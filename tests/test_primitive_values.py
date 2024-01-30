@@ -10,23 +10,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-from .serializable import Serializable
-from .helpers import (
-    to_serializable_repr,
+from serializable import (
     from_serializable_repr,
-    to_json,
-    from_json,
-    to_dict,
+    to_serializable_repr
 )
+from .common import eq_
 
-__version__ = "0.3.0"
+def test_int():
+    eq_(1, from_serializable_repr(to_serializable_repr(1)))
 
-__all__ = [
-    "Serializable",
-    "to_serializable_repr",
-    "from_serializable_repr",
-    "to_json",
-    "from_json",
-    "to_dict",
-]
+def test_float():
+    eq_(1.4, from_serializable_repr(to_serializable_repr(1.4)))
+
+def test_bool():
+    eq_(False, from_serializable_repr(to_serializable_repr(False)))
+
+def test_str():
+    eq_("waffles", from_serializable_repr(to_serializable_repr("waffles")))

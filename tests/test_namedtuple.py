@@ -10,23 +10,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from collections import namedtuple
+from serializable import to_serializable_repr, from_serializable_repr
+from .common import eq_
 
-from .serializable import Serializable
-from .helpers import (
-    to_serializable_repr,
-    from_serializable_repr,
-    to_json,
-    from_json,
-    to_dict,
-)
+A = namedtuple("A", "x y")
 
-__version__ = "0.3.0"
+instance = A(1, 2)
 
-__all__ = [
-    "Serializable",
-    "to_serializable_repr",
-    "from_serializable_repr",
-    "to_json",
-    "from_json",
-    "to_dict",
-]
+def test_namedtuple_to_json():
+    eq_(instance, from_serializable_repr(to_serializable_repr(instance)))

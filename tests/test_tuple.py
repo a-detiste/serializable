@@ -10,23 +10,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-from .serializable import Serializable
-from .helpers import (
+from serializable import (
     to_serializable_repr,
     from_serializable_repr,
     to_json,
     from_json,
-    to_dict,
 )
+from .common import eq_
 
-__version__ = "0.3.0"
+def test_tuple_to_serializable():
+    x = (1, 2.0, "wolves")
+    eq_(x, from_serializable_repr(to_serializable_repr(x)))
 
-__all__ = [
-    "Serializable",
-    "to_serializable_repr",
-    "from_serializable_repr",
-    "to_json",
-    "from_json",
-    "to_dict",
-]
+def test_tuple_to_json():
+    x = (1, 2.0, "wolves")
+    eq_(x, from_json(to_json(x)))

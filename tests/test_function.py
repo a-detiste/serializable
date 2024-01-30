@@ -11,22 +11,20 @@
 # limitations under the License.
 
 
-from .serializable import Serializable
-from .helpers import (
+from serializable import (
     to_serializable_repr,
     from_serializable_repr,
-    to_json,
-    from_json,
-    to_dict,
 )
+from .common import eq_
 
-__version__ = "0.3.0"
+def global_fn():
+    pass
 
-__all__ = [
-    "Serializable",
-    "to_serializable_repr",
-    "from_serializable_repr",
-    "to_json",
-    "from_json",
-    "to_dict",
-]
+def test_serialize_custom_function():
+    fn_reconstructed = from_serializable_repr(to_serializable_repr(global_fn))
+    eq_(global_fn, fn_reconstructed)
+
+
+def test_serialize_builtin_function():
+    fn_reconstructed = from_serializable_repr(to_serializable_repr(sum))
+    eq_(sum, fn_reconstructed)

@@ -11,22 +11,20 @@
 # limitations under the License.
 
 
-from .serializable import Serializable
-from .helpers import (
-    to_serializable_repr,
+from serializable import (
     from_serializable_repr,
-    to_json,
-    from_json,
-    to_dict,
+    to_serializable_repr
 )
+from .common import eq_
 
-__version__ = "0.3.0"
+class A(object):
+    pass
 
-__all__ = [
-    "Serializable",
-    "to_serializable_repr",
-    "from_serializable_repr",
-    "to_json",
-    "from_json",
-    "to_dict",
-]
+def test_serialize_custom_class():
+    A_reconstructed = from_serializable_repr(to_serializable_repr(A))
+    eq_(A, A_reconstructed)
+
+
+def test_serialize_builtin_class():
+    int_reconstructed = from_serializable_repr(to_serializable_repr(int))
+    eq_(int, int_reconstructed)

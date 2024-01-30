@@ -1,5 +1,5 @@
 from serializable import to_serializable_repr, from_serializable_repr, Serializable
-from nose.tools import eq_
+from .common import eq_
 
 class A(Serializable):
     def __init__(self, a_val):
