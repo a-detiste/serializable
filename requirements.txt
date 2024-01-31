@@ -1,2 +1,3 @@
-typechecks >= 0.0.2
-simplejson
+pylint>=1.4.4,<2.0.0
+typechecks >= 0.0.2,<1.0.0
+simplejson>=3.0.0,<4.0.0
