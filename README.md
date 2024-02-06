@@ -1,7 +1,9 @@
 [![Tests](https://github.com/openvax/serializable/actions/workflows/tests.yml/badge.svg)](https://github.com/openvax/serializable/actions/workflows/tests.yml)
 <a href="https://pypi.python.org/pypi/serializable/">
-    <img src="https://img.shields.io/pypi/v/serializable.svg?maxAge=1000" alt="PyPI" />
+<img src="https://img.shields.io/pypi/v/serializable.svg?maxAge=1000" alt="PyPI" />
 </a>
+[![PyPI downloads](https://img.shields.io/pypi/dm/serializable.svg)](https://pypistats.org/packages/serializable)
+
 # serializable
 
 Base class with serialization methods for user-defined Python objects
